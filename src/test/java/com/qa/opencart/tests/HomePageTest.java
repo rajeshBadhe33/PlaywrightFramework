@@ -44,7 +44,6 @@ public class HomePageTest {
         };
     }
 
-
     @Test(dataProvider = "productNames")
     public void searchTest(String productName) {
         String actualSearchResult = homePage.doSearchGetResultString(productName);
