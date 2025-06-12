@@ -1,6 +1,12 @@
 package com.qa.opencart.factory;
 
+import com.google.common.io.Files;
 import com.microsoft.playwright.*;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 public class PlaywrightFactory {
 
@@ -8,11 +14,20 @@ public class PlaywrightFactory {
     Browser browser;
     BrowserContext browserContext;
     Page page;
+    Properties prop;
 
-    public Page initBrowser(String browserName) {
+    /**
+     * this method used to initialize the browser
+     * @param prop
+     * @return
+     */
+    public Page initBrowser(Properties prop) {
 
         playwright = Playwright.create();
+        String browserName = prop.getProperty("browser").trim();
+        String url = prop.getProperty("url").trim();
 
+        System.out.println("browserName = " + browserName);
         switch (browserName.toLowerCase()) {
             case "chromium":
                 browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
@@ -33,8 +48,21 @@ public class PlaywrightFactory {
 
         browserContext = browser.newContext();
         page = browserContext.newPage();
-        page.navigate("https://naveenautomationlabs.com/opencart/");
+        System.out.println("url = " + url);
+        page.navigate(url);
 
         return page;
+    }
+
+    /**
+     * this method used to initialize the properties file from config
+     */
+    public Properties initProp() throws IOException {
+        FileInputStream fileInputStream = new FileInputStream("./src/test/resources/config/config.properties");
+
+        prop = new Properties();
+        prop.load(fileInputStream);
+
+        return prop;
     }
 }

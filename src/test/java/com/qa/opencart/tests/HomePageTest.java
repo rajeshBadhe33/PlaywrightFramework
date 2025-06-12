@@ -1,38 +1,23 @@
 package com.qa.opencart.tests;
 
-import com.microsoft.playwright.Page;
-import com.qa.opencart.factory.PlaywrightFactory;
-import com.qa.opencart.pages.HomePage;
-import jdk.jfr.DataAmount;
+import com.qa.opencart.baseTest.BaseTest;
+import com.qa.opencart.constuns.AppConstuns;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class HomePageTest {
-
-    PlaywrightFactory playwrightFactory;
-    Page page;
-    HomePage homePage;
-
-    @BeforeTest
-    public void setup() {
-        playwrightFactory = new PlaywrightFactory();
-        page = playwrightFactory.initBrowser("Chromium");
-        homePage = new HomePage(page);
-    }
+public class HomePageTest extends BaseTest {
 
     @Test
     public void homePageTitleTest() {
         String actualTitle = homePage.getPageTitle();
-        Assert.assertEquals(actualTitle, "Your Store");
+        Assert.assertEquals(actualTitle, AppConstuns.LOGIN_PAGE_TITLE);
     }
 
     @Test
     public void homePageUrlTest() {
         String actualUrl = homePage.getPageURL();
-        Assert.assertEquals(actualUrl, "https://naveenautomationlabs.com/opencart/");
+        Assert.assertEquals(actualUrl, prop.getProperty("url"));
     }
 
     @DataProvider
@@ -71,8 +56,5 @@ public class HomePageTest {
         Assert.assertEquals(menuName, menu);
     }
 
-    @AfterTest
-    public void tearDown() {
-        page.context().browser().close();
-    }
+
 }
