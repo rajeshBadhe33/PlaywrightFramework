@@ -1,10 +1,9 @@
 package com.qa.opencart.factory;
 
-import com.google.common.io.Files;
 import com.microsoft.playwright.*;
+import com.qa.opencart.constuns.AppConstuns;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -26,20 +25,21 @@ public class PlaywrightFactory {
         playwright = Playwright.create();
         String browserName = prop.getProperty("browser").trim();
         String url = prop.getProperty("url").trim();
+        Boolean headlessFlag = Boolean.valueOf(prop.getProperty("headless").trim());
 
         System.out.println("browserName = " + browserName);
         switch (browserName.toLowerCase()) {
-            case "chromium":
-                browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+            case AppConstuns.CHROMIUM:
+                browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag));
                 break;
-            case "firefox":
-                browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false));
+            case AppConstuns.FIREFOX:
+                browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag));
                 break;
-            case "safari":
-                browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(false));
+            case AppConstuns.SAFARI:
+                browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag));
                 break;
-            case "chrome":
-                browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false));
+            case AppConstuns.CHROME:
+                browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(headlessFlag));
                 break;
             default:
                 System.out.println("Please pass correct browser name..........");
@@ -58,7 +58,7 @@ public class PlaywrightFactory {
      * this method used to initialize the properties file from config
      */
     public Properties initProp() throws IOException {
-        FileInputStream fileInputStream = new FileInputStream("./src/test/resources/config/config.properties");
+        FileInputStream fileInputStream = new FileInputStream(AppConstuns.CONFIG_FILE_PATH);
 
         prop = new Properties();
         prop.load(fileInputStream);
