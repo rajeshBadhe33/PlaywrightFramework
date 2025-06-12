@@ -50,6 +50,27 @@ public class HomePageTest {
         Assert.assertEquals(actualSearchResult, "Search - " + productName);
     }
 
+
+    @DataProvider
+    public Object[][] menuList() {
+        return new Object[][]{
+                {"Desktops"},
+                {"Laptops & Notebooks"},
+                {"Components"},
+                {"Tablets"},
+                {"Software"},
+                {"Phones & PDAs"},
+                {"Cameras"},
+                {"MP3 Players"}
+        };
+    }
+
+    @Test(dataProvider = "menuList")
+    public void verifyMenuOnHomePage(String menu) {
+        String menuName = homePage.getMenu(menu);
+        Assert.assertEquals(menuName, menu);
+    }
+
     @AfterTest
     public void tearDown() {
         page.context().browser().close();

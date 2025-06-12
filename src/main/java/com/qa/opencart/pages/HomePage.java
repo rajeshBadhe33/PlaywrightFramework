@@ -11,6 +11,7 @@ public class HomePage {
     private final String inputSearchBar = "input[name='search']";
     private final String iconSearchBar = "#search>span button";
     private final String lblSearchedHeader = "#content h1";
+    private String menuList = "#menu ul.nav > li > a:has-text('#MENU')";
 
 
     // 2. Page Constructor
@@ -43,6 +44,12 @@ public class HomePage {
         String actualSearchResult = page.textContent(lblSearchedHeader);
         System.out.println("Actual Search Result = " + actualSearchResult);
         return actualSearchResult;
+    }
+
+    public String getMenu(String menuName){
+        String name = page.textContent(menuList.replace("#MENU",menuName));
+        System.out.println("Menu name = " + name);
+        return name;
     }
 
 
