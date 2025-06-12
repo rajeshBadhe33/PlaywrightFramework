@@ -25,7 +25,7 @@ public class PlaywrightFactory {
         playwright = Playwright.create();
         String browserName = prop.getProperty("browser").trim();
         String url = prop.getProperty("url").trim();
-        Boolean headlessFlag = Boolean.valueOf(prop.getProperty("headless").trim());
+        boolean headlessFlag = Boolean.parseBoolean(prop.getProperty("headless").trim());
 
         System.out.println("browserName = " + browserName);
         switch (browserName.toLowerCase()) {
