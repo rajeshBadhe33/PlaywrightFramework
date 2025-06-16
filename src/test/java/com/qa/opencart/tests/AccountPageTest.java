@@ -36,7 +36,6 @@ public class AccountPageTest extends BaseTest {
                 {"Downloads"}
         };
     }
-
     @Test(dataProvider = "rightColumnsOptionList")
     public void verifyRightColumns(String expectedOption) {
         String actualOption = accountPage.getRightColumnList(expectedOption);
