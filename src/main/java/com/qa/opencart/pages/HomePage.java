@@ -25,8 +25,6 @@ public class HomePage {
 
 
     // 3. Page actions/methods
-
-
     public String getPageURL() {
         String url = page.url();
         System.out.println("Page URL is = " + url);

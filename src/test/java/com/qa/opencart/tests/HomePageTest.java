@@ -11,7 +11,7 @@ public class HomePageTest extends BaseTest {
     @Test
     public void homePageTitleTest() {
         String actualTitle = homePage.getPageTitle();
-        Assert.assertEquals(actualTitle, AppConstuns.LOGIN_PAGE_TITLE);
+        Assert.assertEquals(actualTitle, AppConstuns.HOME_PAGE_TITLE);
     }
 
     @Test
