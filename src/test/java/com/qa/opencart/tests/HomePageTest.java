@@ -17,7 +17,7 @@ public class HomePageTest extends BaseTest {
     @Test
     public void homePageUrlTest() {
         String actualUrl = homePage.getPageURL();
-        Assert.assertEquals(actualUrl, prop.getProperty("url"));
+        Assert.assertEquals(actualUrl, prop.getProperty(AppConstuns.URL));
     }
 
     @DataProvider
@@ -55,6 +55,8 @@ public class HomePageTest extends BaseTest {
         String menuName = homePage.getMenu(menu);
         Assert.assertEquals(menuName, menu);
     }
+
+
 
 
 }

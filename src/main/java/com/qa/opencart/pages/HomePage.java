@@ -12,6 +12,9 @@ public class HomePage {
     private final String iconSearchBar = "#search>span button";
     private final String lblSearchedHeader = "#content h1";
     private String menuList = "#menu ul.nav > li > a:has-text('#MENU')";
+    private String lnkMyAccount = "a[title='My Account']";
+    private String lnkLogin = "text=Login"; // a:has-text('Login')
+
 
 
     // 2. Page Constructor
@@ -19,7 +22,11 @@ public class HomePage {
         this.page = page;
     }
 
+
+
     // 3. Page actions/methods
+
+
     public String getPageURL() {
         String url = page.url();
         System.out.println("Page URL is = " + url);
@@ -50,6 +57,12 @@ public class HomePage {
         String name = page.textContent(menuList.replace("#MENU",menuName));
         System.out.println("Menu name = " + name);
         return name;
+    }
+
+    public LoginPage navigateToLoginPage(){
+        page.click(lnkMyAccount);
+        page.click(lnkLogin);
+        return new LoginPage(page);
     }
 
 
