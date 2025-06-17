@@ -2,7 +2,6 @@ package com.qa.opencart.tests;
 
 import com.qa.opencart.baseTest.BaseTest;
 import com.qa.opencart.constuns.AppConstuns;
-import com.qa.opencart.util.TestDataGenerator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
