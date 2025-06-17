@@ -37,10 +37,5 @@ public class AddNewAddressPage {
         page.selectOption(RegionOrStateDropdwon,addressData.get("regionOrState"));
         page.click(continueButton);
         return new AddressBookPage(page);
-
-//        addressData.forEach((key, value) -> {
-//            page.fill(firstNameInputBox, );
-//        });
-
     }
 }

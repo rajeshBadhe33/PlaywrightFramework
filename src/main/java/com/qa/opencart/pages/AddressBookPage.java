@@ -2,6 +2,8 @@ package com.qa.opencart.pages;
 
 import com.microsoft.playwright.Page;
 
+import java.util.List;
+
 public class AddressBookPage {
 
     Page page;
@@ -30,8 +32,8 @@ public class AddressBookPage {
         return new AddNewAddressPage(page);
     }
 
-    public String getAddress(){
-        String addressDetails = page.textContent(addressDetail);
+    public List<String> getAddress(){
+        List<String> addressDetails = page.locator(addressDetail).allTextContents();
         return addressDetails;
     }
 
