@@ -9,15 +9,15 @@ public class AddNewAddressPage {
     Page page;
 
     // 1. String Locators - OR
-    private String firstNameInputBox = "#input-firstname";
-    private String lastNameInputBox = "#input-lastname";
-    private String address1InputBox = "#input-address-1";
-    private String cityInputBox = "#input-city";
-    private String postcodeInputBox = "#input-postcode";
-    private String RegionOrStateDropdwon = "#input-zone";
-    private String countryDropdwon = "#input-country";
-    private String countryDropdwonOptions = "#input-country>option";
-    private String continueButton = "input[type='submit']";
+    private final String firstNameInputBox = "#input-firstname";
+    private final String lastNameInputBox = "#input-lastname";
+    private final String address1InputBox = "#input-address-1";
+    private final String cityInputBox = "#input-city";
+    private final String postcodeInputBox = "#input-postcode";
+    private final String RegionOrStateDropdown = "#input-zone";
+    private final String countryDropdown = "#input-country";
+    private final String countryDropdownOptions = "#input-country>option";
+    private final String continueButton = "input[type='submit']";
 
 
     // 2. Page Constructor
@@ -33,8 +33,8 @@ public class AddNewAddressPage {
         page.fill(address1InputBox, addressData.get("address1"));
         page.fill(cityInputBox, addressData.get("city"));
         page.fill(postcodeInputBox, addressData.get("postcode"));
-        page.click(RegionOrStateDropdwon);
-        page.selectOption(RegionOrStateDropdwon,addressData.get("regionOrState"));
+        page.click(RegionOrStateDropdown);
+        page.selectOption(RegionOrStateDropdown,addressData.get("regionOrState"));
         page.click(continueButton);
         return new AddressBookPage(page);
     }
