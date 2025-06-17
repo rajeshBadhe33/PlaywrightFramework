@@ -20,7 +20,7 @@ public class AccountPage {
 
     // 3. Page actions/methods
     public String getPageHeader() {
-        page.pause();
+//        page.pause();
         return page.textContent(accountLink);
     }
 
