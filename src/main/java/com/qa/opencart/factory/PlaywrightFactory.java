@@ -5,6 +5,7 @@ import com.qa.opencart.constuns.AppConstuns;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class PlaywrightFactory {
@@ -15,10 +16,10 @@ public class PlaywrightFactory {
 //    Page page;
     Properties prop;
 
-    private ThreadLocal<Playwright> playwrightThreadLocal = new ThreadLocal<>();
-    private ThreadLocal<Browser> browserThreadLocal = new ThreadLocal<>();
-    private ThreadLocal<BrowserContext> browserContextThreadLocal = new ThreadLocal<>();
-    private ThreadLocal<Page> pageThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<Playwright> playwrightThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<Browser> browserThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<BrowserContext> browserContextThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<Page> pageThreadLocal = new ThreadLocal<>();
 
     public Playwright getPlaywrightThreadLocal() {
         return playwrightThreadLocal.get();
@@ -44,7 +45,7 @@ public class PlaywrightFactory {
         this.browserContextThreadLocal.set(browserContextThreadLocal);
     }
 
-    public Page getPageThreadLocal() {
+    public static Page getPageThreadLocal() {
         return pageThreadLocal.get();
     }
 
@@ -99,7 +100,7 @@ public class PlaywrightFactory {
         setBrowserContextThreadLocal(getBrowserThreadLocal().newContext());
         setPageThreadLocal(getBrowserContextThreadLocal().newPage());
         getPageThreadLocal().navigate(url);
-
+        getPageThreadLocal().waitForLoadState();
         return getPageThreadLocal();
     }
 
@@ -113,5 +114,19 @@ public class PlaywrightFactory {
         prop.load(fileInputStream);
 
         return prop;
+    }
+
+    /**
+     * take screenshot
+     *
+     */
+
+    public static String takeScreenshot() {
+        String path = System.getProperty("user.dir") +  "./screenshot/" + System.currentTimeMillis() + ".png";
+
+        getPageThreadLocal().screenshot(new Page.ScreenshotOptions()
+                .setPath(Paths.get(path))
+                .setFullPage(true));
+        return path;
     }
 }

@@ -3,37 +3,39 @@
 
 <suite name="Open Cart Test Regression PW Suite" thread-count="5" parallel="tests" verbose="4">
 
+    <listeners>
+        <listener class-name="com.qa.opencart.listeners.ExtentReportListener"/>
+    </listeners>
+
     <test name="Open Cart Home Page Test">
         <classes>
-            <class name="com.qa.opencart.tests.HomePageTest" />
+            <class name="com.qa.opencart.tests.HomePageTest"/>
         </classes>
     </test>
 
     <test name="Open Cart Login Page Test">
         <classes>
-            <class name="com.qa.opencart.tests.LoginPageTest" />
+            <class name="com.qa.opencart.tests.LoginPageTest"/>
         </classes>
     </test>
 
     <test name="Open Cart Account Page Test">
         <classes>
-            <class name="com.qa.opencart.tests.AccountPageTest" />
+            <class name="com.qa.opencart.tests.AccountPageTest"/>
         </classes>
     </test>
 
     <test name="Open Cart Address Book Page Test">
         <classes>
-            <class name="com.qa.opencart.tests.AddressBookPageTest" />
+            <class name="com.qa.opencart.tests.AddressBookPageTest"/>
         </classes>
     </test>
 
     <test name="Open Cart Add New Address Page Test">
         <classes>
-            <class name="com.qa.opencart.tests.AddNewAddressPageTest" />
+            <class name="com.qa.opencart.tests.AddNewAddressPageTest"/>
         </classes>
     </test>
-
-
 
 
     <!-- <test name="Open Cart Home Page Test_chromium">
@@ -49,8 +51,6 @@
             <class name="com.qa.opencart.tests.LoginPageTest" />
         </classes>
     </test> -->
-
-
 
 
 </suite>
