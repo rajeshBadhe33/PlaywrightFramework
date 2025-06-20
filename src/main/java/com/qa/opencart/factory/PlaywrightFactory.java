@@ -1,6 +1,7 @@
 package com.qa.opencart.factory;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.LoadState;
 import com.qa.opencart.constuns.AppConstuns;
 
 import java.io.FileInputStream;
@@ -108,7 +109,7 @@ public class PlaywrightFactory {
         setBrowserContextThreadLocal(getBrowserThreadLocal().newContext(new Browser.NewContextOptions().setViewportSize(null)));
         setPageThreadLocal(getBrowserContextThreadLocal().newPage());
         getPageThreadLocal().navigate(url);
-        getPageThreadLocal().waitForLoadState();
+        getPageThreadLocal().waitForLoadState(LoadState.DOMCONTENTLOADED);
         return getPageThreadLocal();
     }
 
