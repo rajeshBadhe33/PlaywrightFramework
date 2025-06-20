@@ -6,6 +6,7 @@ import com.qa.opencart.constuns.AppConstuns;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class PlaywrightFactory {
@@ -68,23 +69,30 @@ public class PlaywrightFactory {
         String url = prop.getProperty(AppConstuns.URL).trim();
         boolean headlessFlag = Boolean.parseBoolean(prop.getProperty(AppConstuns.HEADLESS).trim());
 
+        ArrayList<String> arguments = new ArrayList<>();
+        arguments.add("--start-maximized");
+
         System.out.println("browserName = " + browserName);
         switch (browserName.toLowerCase()) {
             case AppConstuns.CHROMIUM:
                 // browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag));
-                setBrowserThreadLocal(getPlaywrightThreadLocal().chromium().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag)));
+                setBrowserThreadLocal(getPlaywrightThreadLocal().chromium().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag).setArgs(arguments)));
                 break;
             case AppConstuns.FIREFOX:
                 // browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag));
-                setBrowserThreadLocal(getPlaywrightThreadLocal().firefox().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag)));
+                setBrowserThreadLocal(getPlaywrightThreadLocal().firefox().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag).setArgs(arguments)));
                 break;
             case AppConstuns.SAFARI:
                 //browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag));
-                setBrowserThreadLocal(getPlaywrightThreadLocal().webkit().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag)));
+                setBrowserThreadLocal(getPlaywrightThreadLocal().webkit().launch(new BrowserType.LaunchOptions().setHeadless(headlessFlag).setArgs(arguments)));
                 break;
             case AppConstuns.CHROME:
                 //browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(headlessFlag));
-                setBrowserThreadLocal(getPlaywrightThreadLocal().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(headlessFlag)));
+                setBrowserThreadLocal(getPlaywrightThreadLocal().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(headlessFlag).setArgs(arguments)));
+                break;
+            case AppConstuns.EDGE:
+                //browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(headlessFlag));
+                setBrowserThreadLocal(getPlaywrightThreadLocal().chromium().launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(headlessFlag).setArgs(arguments)));
                 break;
             default:
                 System.out.println("Please pass correct browser name..........");
@@ -97,7 +105,7 @@ public class PlaywrightFactory {
 //        page = browserContext.newPage();
 //        page.navigate(url);
 
-        setBrowserContextThreadLocal(getBrowserThreadLocal().newContext());
+        setBrowserContextThreadLocal(getBrowserThreadLocal().newContext(new Browser.NewContextOptions().setViewportSize(null)));
         setPageThreadLocal(getBrowserContextThreadLocal().newPage());
         getPageThreadLocal().navigate(url);
         getPageThreadLocal().waitForLoadState();
