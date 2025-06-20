@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Open Cart Test Regression PW Suite" thread-count="5" parallel="tests" verbose="4">
+<suite name="Open Cart Test Regression PW Suite" thread-count="7" parallel="tests" verbose="4">
 
     <listeners>
-        <listener class-name="com.qa.opencart.listeners.ExtentReportListener"/>
+<!--        <listener class-name="com.qa.opencart.listeners.ExtentReportListener"/>   -->
+        <listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
     </listeners>
 
     <test name="Open Cart Home Page Test">
@@ -38,19 +39,19 @@
     </test>
 
 
-    <!-- <test name="Open Cart Home Page Test_chromium">
-        <parameter name="browser" value="chromium" />
+    <test name="Open Cart Home Page Test_safari">
+        <parameter name="browsers" value="safari" />
         <classes>
-            <class name="com.qa.opencart.tests.LoginPageTest" />
+            <class name="com.qa.opencart.tests.HomePageTest" />
         </classes>
-    </test> -->
+    </test>
 
-    <!-- <test name="Open Cart Login Page Test_edge1">
-        <parameter name="browser" value="edge" />
+    <test name="Open Cart Login Page Test_edge">
+        <parameter name="browsers" value="edge" />
         <classes>
             <class name="com.qa.opencart.tests.LoginPageTest" />
         </classes>
-    </test> -->
+    </test>
 
 
 </suite>
